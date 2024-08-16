@@ -1,0 +1,43 @@
+services:  
+  hadoop:
+    image: chophannnn/hadoop:3.3.6
+    container_name: hadoop
+    ports:
+      - 9870:9870
+      - 9864:9864
+      - 8088:8088
+    tty: true
+    networks:
+      hadoop:
+        ipv4_address: 172.18.0.2
+
+  hive:
+    image: chophannnn/hive:3.1.2
+    container_name: hive
+    tty: true
+    networks:
+      hadoop:
+        ipv4_address: 172.18.0.3
+
+  spark:
+    image: chophannnn/spark:3.3.0
+    container_name: spark
+    ports:
+      - 8080:8080
+      - 4040:4040
+    tty: true
+    networks:
+      hadoop:
+        ipv4_address: 172.18.0.4
+
+  mysql:
+    image: chophannnn/mysql:8.0.37
+    container_name: mysql
+    tty: true
+    networks:
+      hadoop:
+        ipv4_address: 172.18.0.5
+
+networks:
+  hadoop:
+    external: true
